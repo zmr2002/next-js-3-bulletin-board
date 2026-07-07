@@ -1,68 +1,138 @@
 # Day 1: Project Setup And Prisma
 
-## 目標
+## Goal
 
-Next.js 14、TypeScript、Tailwind CSS、Prisma、MySQL の基礎構成を作り、掲示板アプリの土台を理解する。
+Next.js 14、TypeScript、Tailwind CSS、Prisma、MySQL の基礎環境を作り、掲示板アプリの土台を理解する。
 
-## 学習内容
+この日は「コードを書く量」よりも、project structure、database schema、migration、Prisma Client の役割を説明できるようになることを重視する。
+
+## Learning Topics
 
 - Next.js App Router の基本構造。
 - `src/app`、`src/components`、`src/lib`、`prisma` の役割。
-- Prisma schema、migration、Prisma Client の役割。
-- MySQL connection string と `.env` の関係。
+- server component、client component、layout、page の位置づけ。
+- Prisma schema、migration、Prisma Client の違い。
+- MySQL connection string と `.env` の役割。
 - `User`、`Post`、`Response` model の relation。
+- development DB と production-style DB の違い。
 
-## Codex が実装したこと
+## Coding Tasks
 
-- Next.js 14 project setup。
-- TypeScript/Tailwind の基本構成。
-- Prisma setup。
+Codex が生成・設定した内容:
+
+- Next.js 14 TypeScript project。
+- Tailwind CSS。
+- Prisma。
 - MySQL datasource。
 - `User`、`Post`、`Response` model。
 - Prisma Client helper。
-- Home page と dashboard placeholder。
+- first migration。
+- home page。
+- dashboard placeholder。
 
-## 重要ファイル
+作成・変更された主なファイル:
 
 ```text
 prisma/schema.prisma
 src/lib/db.ts
+src/app/layout.tsx
 src/app/page.tsx
 src/app/dashboard/page.tsx
+package.json
 .env.example
 ```
 
-## 確認コマンド
+## Manual Testing Checklist
+
+MySQL を起動する:
+
+```powershell
+scripts\start-local-mysql.cmd
+```
+
+Prisma Client を生成する:
 
 ```powershell
 npx.cmd prisma generate
+```
+
+migration 状態を確認する:
+
+```powershell
 npx.cmd prisma migrate status
+```
+
+開発サーバーを起動する:
+
+```powershell
 npm.cmd run dev
 ```
 
-MySQL 例:
+ブラウザで確認:
 
-```env
-DATABASE_URL="mysql://root:YOUR_LOCAL_MYSQL_PASSWORD@127.0.0.1:3307/bulletin_board"
+```text
+http://localhost:3000
 ```
 
-## 手動確認
+MySQL table を確認:
 
-- App が起動する。
-- Prisma Client が生成される。
-- Migration status が up to date になる。
-- MySQL に `users`、`posts`、`responses` table がある。
+```sql
+USE bulletin_board;
+SHOW TABLES;
+DESCRIBE users;
+DESCRIBE posts;
+DESCRIBE responses;
+```
 
-## 重要な理解
+## Intentional Bug Drill
 
-- `schema.prisma` は DB model と relation を定義する。
-- migration は schema を実際の DB table に反映する。
-- Prisma Client は TypeScript から DB を操作するための client。
-- `authorId` は post/response を user に接続する。
-- `postId` は response を post に接続する。
+Bug drill:
 
-## 完了条件
+```text
+DATABASE_URL を一時的に壊し、Prisma が DB に接続できない error を読む。
+```
+
+確認すること:
+
+- error message に host、port、database、user、password のどれが関係しているか。
+- `.env` と Prisma command の関係。
+- `npx.cmd prisma generate` と `npx.cmd prisma migrate status` の違い。
+
+## Hint Ladder
+
+1. Concept hint:
+   `DATABASE_URL` は Prisma が MySQL に接続するための住所。
+2. File/layer hint:
+   `.env` と `prisma/schema.prisma` を見る。
+3. Command hint:
+   `npx.cmd prisma migrate status` で接続状態を確認する。
+4. Final fix:
+   `.env` の `DATABASE_URL` を正しい MySQL 接続文字列に戻す。
+
+## Explanation Practice
+
+答えられるようにする質問:
+
+- `schema.prisma` は何を定義するか。
+- migration は何を作るか。
+- Prisma Client は何に使うか。
+- `provider = "mysql"` はなぜ重要か。
+- `@@map("users")` は何を意味するか。
+- `Post.authorId` は何を保存するか。
+- `Response.postId` と `Response.authorId` は何を保存するか。
+- `.env` と `.env.example` の違いは何か。
+- `.env` を Git に含めない理由は何か。
+
+## Done Criteria
 
 - App が local で起動する。
-- MySQL と Prisma が接続できる。
+- Prisma migration status が正常。
+- MySQL に `users`、`posts`、`responses` table がある。
 - `User`、`Post`、`Response` の relation を説明できる。
+- schema、migration、Prisma Client の違いを説明できる。
+
+## Notes To Write Yourself
+
+- 今日つまずいた command。
+- MySQL connection で理解したこと。
+- Prisma relation でまだ曖昧なこと。
