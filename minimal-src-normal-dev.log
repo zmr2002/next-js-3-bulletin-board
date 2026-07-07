@@ -1,0 +1,12 @@
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3010
+
+ ✓ Starting...
+2026-06-30T02:37:07.113Z next:router-server:filesystem nextDataRoutes Set(0) {}
+2026-06-30T02:37:07.115Z next:router-server:filesystem dynamicRoutes []
+2026-06-30T02:37:07.115Z next:router-server:filesystem pageFiles Set(0) {}
+2026-06-30T02:37:07.115Z next:router-server:filesystem appFiles Set(0) {}
+ ✓ Ready in 2.8s
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1942ms (434 modules)
+ GET / 404 in 2089ms
