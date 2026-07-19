@@ -5,5 +5,8 @@ node_modules/
 out/
 coverage/
 .local-mysql/
+.agents/
+.codex/
+.swc/
 
 *.log

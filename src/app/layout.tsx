@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "ログイン式掲示板",
-  description: "Next.js のログイン式掲示板学習プロジェクト"
+  description: "Next.js のログイン式掲示板アプリ"
 };
 
 export default function RootLayout({

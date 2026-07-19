@@ -77,7 +77,7 @@ export default async function ProfilePage() {
           <h2 className="text-base font-semibold text-red-950">アカウント退会</h2>
           <p className="mt-2 text-sm leading-6 text-red-800">
             退会すると <code>isDeleted</code> が true になり、アカウントは soft delete されます。
-            学習目的のため、user row は MySQL に残ります。
+            関連データとの整合性を保つため、user row は MySQL に残ります。
           </p>
           <div className="mt-4">
             <WithdrawAccountButton />

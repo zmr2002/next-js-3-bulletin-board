@@ -11,7 +11,7 @@ export async function Header() {
     <header className="border-b border-slate-200 bg-white">
       <nav className="mx-auto flex min-h-14 w-full max-w-4xl items-center justify-between px-6">
         <Link className="text-sm font-bold text-slate-950" href="/">
-          学習掲示板
+          掲示板
         </Link>
         <div className="flex items-center gap-4">
           <Link className="text-sm font-medium text-slate-600 hover:text-slate-950" href="/posts">
